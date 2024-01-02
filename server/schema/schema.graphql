@@ -65,6 +65,7 @@ interface Node {
 
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
+  PatientSignUpMutation(input: PatientSignUpMutationInput!): PatientSignUpMutationPayload
 }
 
 type MessageAddPayload {
@@ -74,6 +75,26 @@ type MessageAddPayload {
 
 input MessageAddInput {
   content: String!
+  clientMutationId: String
+}
+
+type PatientSignUpMutationPayload {
+  me: Patient
+  token: String
+  clientMutationId: String
+}
+
+type Patient {
+  """The ID of an object"""
+  id: ID!
+  username: String!
+  email: String
+}
+
+input PatientSignUpMutationInput {
+  username: String!
+  email: String!
+  password: String!
   clientMutationId: String
 }
 
