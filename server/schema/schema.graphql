@@ -103,6 +103,7 @@ type Patient implements Node {
 
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
+  PatientSignInMutation(input: PatientSignInMutationInput!): PatientSignInMutationPayload
   PatientSignUpMutation(input: PatientSignUpMutationInput!): PatientSignUpMutationPayload
 }
 
@@ -113,6 +114,17 @@ type MessageAddPayload {
 
 input MessageAddInput {
   content: String!
+  clientMutationId: String
+}
+
+type PatientSignInMutationPayload {
+  me: Patient
+  clientMutationId: String
+}
+
+input PatientSignInMutationInput {
+  email: String!
+  password: String!
   clientMutationId: String
 }
 
