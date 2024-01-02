@@ -8,6 +8,8 @@ async function connectDatabase() {
   );
 
   await mongoose.connect(config.MONGO_URI);
+  await mongoose.connection.db.admin().ping();
+  console.log("MongoDB connection has been established.");
 }
 
 export { connectDatabase };
