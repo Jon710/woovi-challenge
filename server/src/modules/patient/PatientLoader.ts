@@ -1,5 +1,5 @@
-// loaders (data loaders) provide 2 main benefits: caching and batching requests
 import { createLoader } from "@entria/graphql-mongo-helpers";
+
 import { registerLoader } from "../loader/loaderRegister";
 import { PatientModel } from "./PatientModel";
 
@@ -13,4 +13,10 @@ const {
 
 registerLoader("PatientLoader", getLoader);
 
-export { Patient, getLoader, clearCache, load, loadAll };
+export const PatientLoader = {
+  Patient,
+  getLoader,
+  clearCache,
+  load,
+  loadAll,
+};
