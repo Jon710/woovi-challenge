@@ -13,7 +13,19 @@ type Query {
     """Returns the last n items from the list."""
     last: Int
   ): MessageConnection
-  hello: String
+  patients(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): PatientConnection
 }
 
 """A connection to a list of items."""
@@ -63,6 +75,32 @@ interface Node {
   id: ID!
 }
 
+"""A connection to a list of items."""
+type PatientConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PatientEdge]
+}
+
+"""An edge in a connection."""
+type PatientEdge {
+  """The item at the end of the edge"""
+  node: Patient
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Patients who use the application"""
+type Patient implements Node {
+  """The ID of an object"""
+  id: ID!
+  username: String!
+  email: String
+}
+
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
   PatientSignUpMutation(input: PatientSignUpMutationInput!): PatientSignUpMutationPayload
@@ -82,13 +120,6 @@ type PatientSignUpMutationPayload {
   me: Patient
   token: String
   clientMutationId: String
-}
-
-type Patient {
-  """The ID of an object"""
-  id: ID!
-  username: String!
-  email: String
 }
 
 input PatientSignUpMutationInput {
