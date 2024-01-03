@@ -26,6 +26,19 @@ type Query {
     """Returns the last n items from the list."""
     last: Int
   ): PatientConnection
+  doctors(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): DoctorConnection
 }
 
 """A connection to a list of items."""
@@ -101,10 +114,38 @@ type Patient implements Node {
   email: String
 }
 
+"""A connection to a list of items."""
+type DoctorConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DoctorEdge]
+}
+
+"""An edge in a connection."""
+type DoctorEdge {
+  """The item at the end of the edge"""
+  node: Doctor
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Doctors who use the application to attend appointments"""
+type Doctor implements Node {
+  """The ID of an object"""
+  id: ID!
+  username: String!
+  email: String
+}
+
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
   PatientSignInMutation(input: PatientSignInMutationInput!): PatientSignInMutationPayload
   PatientSignUpMutation(input: PatientSignUpMutationInput!): PatientSignUpMutationPayload
+  DoctorSignInMutation(input: DoctorSignInMutationInput!): DoctorSignInMutationPayload
+  DoctorSignUpMutation(input: DoctorSignUpMutationInput!): DoctorSignUpMutationPayload
 }
 
 type MessageAddPayload {
@@ -135,6 +176,30 @@ type PatientSignUpMutationPayload {
 }
 
 input PatientSignUpMutationInput {
+  username: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type DoctorSignInMutationPayload {
+  me: Doctor
+  clientMutationId: String
+}
+
+input DoctorSignInMutationInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type DoctorSignUpMutationPayload {
+  me: Doctor
+  token: String
+  clientMutationId: String
+}
+
+input DoctorSignUpMutationInput {
   username: String!
   email: String!
   password: String!
