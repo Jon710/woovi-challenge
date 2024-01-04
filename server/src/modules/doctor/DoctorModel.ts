@@ -32,6 +32,10 @@ const DoctorSchema = new Schema<DoctorDocument>(
       hidden: true,
       required: true,
     },
+    appointments: {
+      type: [Types.ObjectId],
+      ref: "Appointment",
+    },
   },
   {
     collection: "Doctor",

@@ -144,6 +144,7 @@ type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
   PatientSignInMutation(input: PatientSignInMutationInput!): PatientSignInMutationPayload
   PatientSignUpMutation(input: PatientSignUpMutationInput!): PatientSignUpMutationPayload
+  ScheduleAppointmentMutation(input: ScheduleAppointmentMutationInput!): ScheduleAppointmentMutationPayload
   DoctorSignInMutation(input: DoctorSignInMutationInput!): DoctorSignInMutationPayload
   DoctorSignUpMutation(input: DoctorSignUpMutationInput!): DoctorSignUpMutationPayload
 }
@@ -179,6 +180,26 @@ input PatientSignUpMutationInput {
   username: String!
   email: String!
   password: String!
+  clientMutationId: String
+}
+
+type ScheduleAppointmentMutationPayload {
+  appointment: Appointment
+  clientMutationId: String
+}
+
+"""Appointments scheduled by patient with chosen doctor"""
+type Appointment implements Node {
+  """The ID of an object"""
+  id: ID!
+  doctorId: String!
+  patientId: String!
+}
+
+input ScheduleAppointmentMutationInput {
+  doctorId: String!
+  startsAt: String!
+  date: String!
   clientMutationId: String
 }
 

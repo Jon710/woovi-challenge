@@ -18,28 +18,14 @@ type PatientDocument = Document & IPatient;
 
 const PatientSchema = new Schema<PatientDocument>(
   {
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      index: true,
-    },
-    password: {
-      type: String,
-      hidden: true,
-      required: true,
-    },
+    username: { type: String, required: true },
+    email: { type: String, required: true, unique: true, index: true },
+    password: { type: String, hidden: true, required: true },
+    appointments: { type: [Types.ObjectId], ref: "Appointment" },
   },
   {
     collection: "Patient",
-    timestamps: {
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
-    },
+    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   }
 );
 

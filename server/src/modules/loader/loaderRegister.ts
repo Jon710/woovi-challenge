@@ -1,16 +1,33 @@
-const loaders: Record<string, () => unknown> = {};
+interface DataLoaders {
+  PatientLoader: ReturnType<
+    typeof import("../Patient/PatientLoader").PatientLoader.getLoader
+  >;
+  AppointmentLoader: ReturnType<
+    typeof import("../Appointment/AppointmentLoader").AppointmentLoader.getLoader
+  >;
+}
 
-const registerLoader = (key: string, getLoader: () => unknown) => {
-	loaders[key] = getLoader;
+type Loaders =
+  | { [Name in keyof DataLoaders]: () => DataLoaders[Name] }
+  | Record<string, () => unknown>;
+
+const loaders: Loaders = {};
+
+const registerLoader = <Name extends keyof DataLoaders>(
+  key: Name,
+  getLoader: () => DataLoaders[Name]
+) => {
+  loaders[key] = getLoader;
 };
 
-const getDataloaders = (): Record<string, () => unknown> =>
-	Object.keys(loaders).reduce(
-		(prev, loaderKey) => ({
-			...prev,
-			[loaderKey]: loaders[loaderKey](),
-		}),
-		{}
-	);
+const getDataLoaders = (): DataLoaders =>
+  (Object.keys(loaders) as (keyof DataLoaders)[]).reduce(
+    (prev, loaderKey) => ({
+      ...prev,
+      [loaderKey]: loaders[loaderKey](),
+    }),
+    {}
+  ) as DataLoaders;
 
-export { registerLoader, getDataloaders };
+export type { DataLoaders };
+export { registerLoader, getDataLoaders };
