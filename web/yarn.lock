@@ -1690,6 +1690,11 @@
   dependencies:
     "@swc/helpers" "^0.5.0"
 
+"@remix-run/router@1.14.1":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.14.1.tgz#6d2dd03d52e604279c38911afc1079d58c50a755"
+  integrity sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==
+
 "@restart/hooks@^0.4.9":
   version "0.4.15"
   resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.4.15.tgz#70990085c9b79d1f3e140db824b29218bdc2b5bb"
@@ -2021,6 +2026,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cookie@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.6.0.tgz#eac397f28bf1d6ae0ae081363eca2f425bedf0d5"
+  integrity sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.7"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.7.tgz#3108bd5f18b0cdb277c867b3dd449c9ed7079ac5"
@@ -2202,6 +2212,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-relay@^16.0.5":
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-16.0.5.tgz#3a67c0b05033325aa2361aa499d5e779704275ac"
+  integrity sha512-iQjijrgYN3SeOxzr2O4bh4ez9xajj1KLwgakui5VKiw/f9r5IISMB7bMq/KdlNO5W3p8qyB09h24iIcO3jMz/g==
+  dependencies:
+    "@types/react" "*"
+    "@types/relay-runtime" "*"
+
 "@types/react-transition-group@^4.4.6":
   version "4.4.10"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.10.tgz#6ee71127bdab1f18f11ad8fb3322c6da27c327ac"
@@ -2217,6 +2235,11 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
+
+"@types/relay-runtime@*", "@types/relay-runtime@^14.1.21":
+  version "14.1.21"
+  resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-14.1.21.tgz#775be49c3ca874c21e4563e1479f8060c93ced46"
+  integrity sha512-dEdeG9xEThV0mFmAil/aNNi/U/f+oFm7X6Y395BYSUqSZCOZhQmEZy22azKxYeUAL6qx8cft9hrZjySDeHXYiw==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -8115,6 +8138,21 @@ react-relay@^16.1.0:
     nullthrows "^1.1.1"
     relay-runtime "16.1.0"
 
+react-router-dom@^6.21.1:
+  version "6.21.1"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.21.1.tgz#58b459d2fe1841388c95bb068f85128c45e27349"
+  integrity sha512-QCNrtjtDPwHDO+AO21MJd7yIcr41UetYt5jzaB9Y1UYaPTCnVuJq6S748g1dE11OQlCFIQg+RtAA1SEZIyiBeA==
+  dependencies:
+    "@remix-run/router" "1.14.1"
+    react-router "6.21.1"
+
+react-router@6.21.1:
+  version "6.21.1"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.21.1.tgz#8db7ee8d7cfc36513c9a66b44e0897208c33be34"
+  integrity sha512-W0l13YlMTm1YrpVIOpjCADJqEUpz1vm+CMo47RuFX4Ftegwm6KOYsL5G3eiE52jnJpKvzm6uB/vTKTPKM8dmkA==
+  dependencies:
+    "@remix-run/router" "1.14.1"
+
 react-scripts@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-5.0.1.tgz#6285dbd65a8ba6e49ca8d651ce30645a6d980003"
@@ -8322,7 +8360,7 @@ relay-compiler@^16.1.0:
   resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-16.1.0.tgz#57b08740f415a90d1ac6cdcf12ba747fa30cdfb4"
   integrity sha512-ZceB9u0Zx5/6VJwRViaGwZEUsEY/wqdbxPs7AD2/udZYabRae5az97MU9XZ3p4zIeZhR+y9y2+KLdXuoECeLvA==
 
-relay-runtime@16.1.0:
+relay-runtime@16.1.0, relay-runtime@^16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-16.1.0.tgz#7ea5fa0e5964069f1bcfe802a41a20f92560e704"
   integrity sha512-SM5MP4ETxTtYrXya5ceAEF3XuVzlku48+YyaxZkTnXG/FUvE2QfIxkZ5P2Q/j33Eo9tfrcl4UfZoSkx6IbQ37Q==
