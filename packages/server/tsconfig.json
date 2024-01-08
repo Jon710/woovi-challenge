@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "./dist/tsc",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+  },
+  "include": ["srcDele/**/*", "./package.json"],
+  "exclude": ["node_modules", "dist", "srcDele/**/*.test.ts", "test/**/*", "srcDele/**/fixtures/*.ts"]
+}
