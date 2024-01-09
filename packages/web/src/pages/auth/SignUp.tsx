@@ -6,36 +6,55 @@ import { FormikProvider, Form as FormikForm, useFormik, Field } from 'formik';
 
 import { PatientSignUp } from '../../modules/patient/PatientSignUpMutation';
 import { PatientSignUpMutation } from '../../modules/patient/__generated__/PatientSignUpMutation.graphql';
+import { DoctorSignUp } from '../../modules/doctor/DoctorSignUpMutation';
+import { DoctorSignUpMutation } from '../../modules/doctor/__generated__/DoctorSignUpMutation.graphql';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [signUp, isLoading] = useMutation<PatientSignUpMutation>(PatientSignUp);
+  const [signUpPatient] = useMutation<PatientSignUpMutation>(PatientSignUp);
+  const [signUpDoctor] = useMutation<DoctorSignUpMutation>(DoctorSignUp);
 
-  const formikValue = useFormik({
-    initialValues: { username: '', email: '', password: '' },
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+      isPatient: null,
+    },
     onSubmit: values => {
-      signUp({
-        variables: values,
-        onCompleted: ({ PatientSignUpMutation }, error) => {
-          console.log(PatientSignUpMutation);
+      if (formik.values.isPatient === null) {
+        toast.warn('You must select either Doctor or Patient');
+        return;
+      }
 
-          if (error && error.length) {
-            console.log('e', error);
-            toast.error(error[0].message);
-          }
+      if (formik.values.isPatient) {
+        signUpPatient({
+          variables: values,
+          onCompleted: ({ PatientSignUpMutation }, error) => {
+            if (error && error.length) {
+              toast.error(error[0].message);
+              return;
+            }
+          },
+        });
+      } else {
+        signUpDoctor({
+          variables: values,
+          onCompleted: ({ DoctorSignUpMutation }, error) => {
+            if (error && error.length) {
+              toast.error(error[0].message);
+              return;
+            }
+          },
+        });
+      }
 
-          //   signin(userRegisterMutation?.token, () => {
-          //     navigate('/feed', { replace: true });
-          //   });
-        },
-      });
+      navigate('/', { replace: true });
     },
   });
 
-  const { isSubmitting } = formikValue;
-
   return (
-    <FormikProvider value={formikValue}>
+    <FormikProvider value={formik}>
       <FormikForm>
         <div className="row justify-content-md-center p-5">
           <div className="col-lg-auto">
@@ -69,19 +88,23 @@ export default function SignUp() {
                       type="password"
                     />
                   </Form.Group>
-                  {/* <br />
-                <Form.Check
-                  inline
-                  label="Doctor"
-                  type="checkbox"
-                  id="doctor-checkbox"
-                />
-                <Form.Check
-                  inline
-                  label="Patient"
-                  type="checkbox"
-                  id="patient-checkbox"
-                /> */}
+                  <br />
+                  <Form.Check
+                    inline
+                    label="Doctor"
+                    type="checkbox"
+                    id="doctor-checkbox"
+                    checked={formik.values.isPatient === false}
+                    onChange={() => formik.setFieldValue('isPatient', false)}
+                  />
+                  <Form.Check
+                    inline
+                    label="Patient"
+                    type="checkbox"
+                    id="patient-checkbox"
+                    checked={formik.values.isPatient === true}
+                    onChange={() => formik.setFieldValue('isPatient', true)}
+                  />
                   <div className="text-center p-1">
                     <br />
                     <div>
