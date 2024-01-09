@@ -1,4 +1,4 @@
-import { Document, Types, Schema, model } from "mongoose";
+import { Document, Types, Schema, model } from 'mongoose';
 
 export interface Appointment extends Document {
   _id: Types.ObjectId;
@@ -16,19 +16,19 @@ const AppointmentSchema = new Schema<Appointment>(
     startsAt: { type: String, required: true },
     patientId: {
       type: Schema.Types.ObjectId,
-      ref: "Patient",
+      ref: 'Patient',
       required: true,
       index: true,
     },
-    doctorId: { type: Schema.Types.ObjectId, required: true, ref: "Doctor" },
+    doctorId: { type: Schema.Types.ObjectId, required: true, ref: 'Doctor' },
   },
   {
-    collection: "Appointment",
-    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
-  }
+    collection: 'Appointment',
+    timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
+  },
 );
 
 export const AppointmentModel = model<AppointmentDocument>(
-  "Appointment",
-  AppointmentSchema
+  'Appointment',
+  AppointmentSchema,
 );
