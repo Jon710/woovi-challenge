@@ -1,14 +1,14 @@
-import { Routes as Router, Route } from "react-router-dom";
+import { Routes as Router, Route } from 'react-router-dom';
 
-import { AuthRoutes } from "./AuthRoutes";
-// import { RequireAuthLayout } from "./modules/auth/RequireAuthLayout";
-// import { FeedPage } from "./modules/feed/FeedPage";
+import { AuthRoutes } from './AuthRoutes';
+import Appointments from '@/pages/patient/Appointments';
+import { PrivateRoutes } from './PrivateRoutes';
 
 export const Routes = () => (
   <Router>
     <Route path="/*" element={<AuthRoutes />} />
-    {/* <Route element={<RequireAuthLayout />}>
-      <Route path="/feed" element={<FeedPage />} />
-    </Route> */}
+    <Route element={<PrivateRoutes />}>
+      <Route path="/appointments" element={<Appointments />} />
+    </Route>
   </Router>
 );

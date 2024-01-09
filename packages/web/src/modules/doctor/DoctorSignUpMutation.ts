@@ -1,4 +1,4 @@
-import { graphql } from "react-relay";
+import { graphql } from 'react-relay';
 
 export const DoctorSignUp = graphql`
   mutation DoctorSignUpMutation(
