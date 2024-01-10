@@ -1,17 +1,15 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-import { config } from "./config";
-import { PatientDocument, PatientModel } from "./modules/patient/PatientModel";
-import { DoctorDocument, DoctorModel } from "./modules/doctor/DoctorModel";
+import { config } from './config';
+import { PatientDocument, PatientModel } from './modules/patient/PatientModel';
+import { DoctorDocument, DoctorModel } from './modules/doctor/DoctorModel';
 
 interface User extends PatientDocument, DoctorDocument {}
 
 async function getUser(token: string | undefined | null) {
-  console.log(token);
-
   if (!token) return null;
 
-  [, token] = token.split("JWT ");
+  [, token] = token.split('JWT ');
 
   const decodedToken = jwt.verify(token, config.JWT_SECRET) as { id: string };
 

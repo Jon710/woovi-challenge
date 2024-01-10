@@ -1,12 +1,11 @@
-import { GraphQLObjectType } from "graphql";
+import { GraphQLObjectType } from 'graphql';
 
-import { messageConnectionField } from "../modules/message/messageFields";
-import { patientsConnectionField } from "../modules/patient/patientFields";
-import { doctorsConnectionField } from "../modules/doctor/doctorFields";
+import { patientsConnectionField } from '../modules/patient/patientFields';
+import { doctorsConnectionField } from '../modules/doctor/doctorFields';
 
 export const QueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "Queries",
+  name: 'Query',
+  description: 'Queries',
   fields: () => ({
     // me: {
     //   type: UserType,
@@ -14,8 +13,7 @@ export const QueryType = new GraphQLObjectType({
     //     return UserLoader.load(ctx, ctx.user?.id);
     //   },
     // },
-    ...messageConnectionField("messages"),
-    ...patientsConnectionField("patients"),
-    ...doctorsConnectionField("doctors"),
+    ...patientsConnectionField('patients'),
+    ...doctorsConnectionField('doctors'),
   }),
 });

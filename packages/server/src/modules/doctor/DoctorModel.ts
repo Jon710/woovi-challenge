@@ -1,5 +1,5 @@
-import { hashSync, compareSync } from "bcryptjs";
-import { Schema, model, Document, Types } from "mongoose";
+import { hashSync, compareSync } from 'bcryptjs';
+import { Schema, model, Document, Types } from 'mongoose';
 
 interface IDoctor {
   _id: Types.ObjectId;
@@ -34,16 +34,16 @@ const DoctorSchema = new Schema<DoctorDocument>(
     },
     appointments: {
       type: [Types.ObjectId],
-      ref: "Appointment",
+      ref: 'Appointment',
     },
   },
   {
-    collection: "Doctor",
+    collection: 'Doctor',
     timestamps: {
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
     },
-  }
+  },
 );
 
 DoctorSchema.methods = {
@@ -56,15 +56,15 @@ DoctorSchema.methods = {
   },
 };
 
-DoctorSchema.pre("save", function encryptPasswordHook(next) {
-  if (this.isModified("password")) {
+DoctorSchema.pre('save', function encryptPasswordHook(next) {
+  if (this.isModified('password')) {
     this.password = this.encryptPassword(this.password);
   }
 
   return next();
 });
 
-const DoctorModel = model<DoctorDocument>("Doctor", DoctorSchema);
+const DoctorModel = model<DoctorDocument>('Doctor', DoctorSchema);
 
 export type { DoctorDocument };
 export { DoctorModel };

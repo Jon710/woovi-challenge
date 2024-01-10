@@ -1,11 +1,11 @@
-import { Types } from "mongoose";
-import { GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
+import { Types } from 'mongoose';
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
 
-import { AppointmentModel } from "../../appointment/AppointmentModel";
-import { DoctorModel } from "../../doctor/DoctorModel";
-import { AppointmentType } from "../../appointment/AppointmentType";
-import { GraphQLContext } from "../../../graphql/context";
+import { AppointmentModel } from '../../appointment/AppointmentModel';
+import { DoctorModel } from '../../doctor/DoctorModel';
+import { AppointmentType } from '../../appointment/AppointmentType';
+import { GraphQLContext } from '../../../graphql/context';
 
 interface ScheduleAppointmentMutationArgs {
   doctorId: Types.ObjectId;
@@ -14,7 +14,7 @@ interface ScheduleAppointmentMutationArgs {
 }
 
 const ScheduleAppointmentMutation = mutationWithClientMutationId({
-  name: "ScheduleAppointmentMutation",
+  name: 'ScheduleAppointmentMutation',
   inputFields: {
     doctorId: { type: new GraphQLNonNull(GraphQLString) },
     startsAt: { type: new GraphQLNonNull(GraphQLString) },
@@ -22,12 +22,12 @@ const ScheduleAppointmentMutation = mutationWithClientMutationId({
   },
   mutateAndGetPayload: async (
     args: ScheduleAppointmentMutationArgs,
-    ctx: GraphQLContext
+    ctx: GraphQLContext,
   ) => {
     const { doctorId, startsAt, date } = args;
 
     // TODO: middleware?
-    if (!ctx.user) throw new Error("You are not logged in. Try again!");
+    if (!ctx.user) throw new Error('You are not logged in. Try again!');
 
     const doctor = await DoctorModel.findById(doctorId);
 
@@ -52,7 +52,7 @@ const ScheduleAppointmentMutation = mutationWithClientMutationId({
       }),
     ]);
 
-    return { id: ctx?.user._id, success: "Appointment has been created!" };
+    return { id: ctx?.user._id, success: 'Appointment has been created!' };
   },
   outputFields: {
     appointment: {

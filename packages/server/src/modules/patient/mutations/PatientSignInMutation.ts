@@ -1,9 +1,9 @@
-import { GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
 
-import { PatientType } from "../PatientType";
-import { PatientModel } from "../PatientModel";
-import { generateToken } from "../../../auth";
+import { PatientType } from '../PatientType';
+import { PatientModel } from '../PatientModel';
+import { generateToken } from '../../../auth';
 
 interface PatientSignInMutationArgs {
   email: string;
@@ -11,7 +11,7 @@ interface PatientSignInMutationArgs {
 }
 
 const PatientSignInMutation = mutationWithClientMutationId({
-  name: "PatientSignInMutation",
+  name: 'PatientSignInMutation',
   inputFields: {
     email: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
@@ -21,11 +21,11 @@ const PatientSignInMutation = mutationWithClientMutationId({
 
     const user = await PatientModel.findOne({ email });
 
-    if (!user) throw new Error("Patient not found!");
+    if (!user) throw new Error('Patient not found!');
 
     const isPasswordCorrect = user.authenticate(password);
 
-    if (!isPasswordCorrect) throw new Error("Wrong password! Try again.");
+    if (!isPasswordCorrect) throw new Error('Wrong password! Try again.');
 
     const token = generateToken(user._id);
 

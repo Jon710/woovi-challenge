@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
-import { config } from "./config";
+/* eslint-disable no-console */
+import mongoose from 'mongoose';
+import { config } from './config';
 
 async function connectDatabase() {
-  // eslint-disable-next-line
-  mongoose.connection.on("close", () =>
-    console.log("Database connection closed.")
+  mongoose.connection.on('close', () =>
+    console.log('Database connection closed.'),
   );
 
   await mongoose.connect(config.MONGO_URI);
   await mongoose.connection.db.admin().ping();
-  console.log("MongoDB connection has been established.");
+  console.log('MongoDB connection has been established.');
 }
 
 export { connectDatabase };

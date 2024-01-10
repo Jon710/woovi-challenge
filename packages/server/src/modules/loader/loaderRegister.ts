@@ -1,33 +1,28 @@
-interface DataLoaders {
-  PatientLoader: ReturnType<
-    typeof import("../Patient/PatientLoader").PatientLoader.getLoader
+export interface DataLoaders {
+  PatientLoader?: ReturnType<
+    typeof import('../patient/PatientLoader').getLoader
   >;
-  AppointmentLoader: ReturnType<
-    typeof import("../Appointment/AppointmentLoader").AppointmentLoader.getLoader
-  >;
+  DoctorLoader?: ReturnType<typeof import('../doctor/DoctorLoader').getLoader>;
 }
 
-type Loaders =
-  | { [Name in keyof DataLoaders]: () => DataLoaders[Name] }
-  | Record<string, () => unknown>;
-
-const loaders: Loaders = {};
+const loaders: {
+  [Name in keyof DataLoaders]: () => DataLoaders[Name];
+} = {};
 
 const registerLoader = <Name extends keyof DataLoaders>(
   key: Name,
-  getLoader: () => DataLoaders[Name]
+  getLoader: typeof loaders[Name],
 ) => {
   loaders[key] = getLoader;
 };
 
-const getDataLoaders = (): DataLoaders =>
-  (Object.keys(loaders) as (keyof DataLoaders)[]).reduce(
-    (prev, loaderKey) => ({
-      ...prev,
-      [loaderKey]: loaders[loaderKey](),
+const getAllDataLoaders = (): DataLoaders =>
+  Object.entries(loaders).reduce(
+    (obj, [loaderKey, loaderFn]) => ({
+      ...obj,
+      [loaderKey]: loaderFn(),
     }),
-    {}
-  ) as DataLoaders;
+    {},
+  );
 
-export type { DataLoaders };
-export { registerLoader, getDataLoaders };
+export { registerLoader, getAllDataLoaders };

@@ -1,12 +1,12 @@
-import { GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
 
-import { PatientType } from "../PatientType";
-import { PatientModel } from "../PatientModel";
-import { generateToken } from "../../../auth";
+import { PatientType } from '../PatientType';
+import { PatientModel } from '../PatientModel';
+import { generateToken } from '../../../auth';
 
 const PatientSignUpMutation = mutationWithClientMutationId({
-  name: "PatientSignUpMutation",
+  name: 'PatientSignUpMutation',
   inputFields: {
     username: { type: new GraphQLNonNull(GraphQLString) },
     email: { type: new GraphQLNonNull(GraphQLString) },
@@ -16,7 +16,7 @@ const PatientSignUpMutation = mutationWithClientMutationId({
     // TODO: validate fields with Zod or Yup
     const patientExists = await PatientModel.exists({ email });
 
-    if (patientExists) throw new Error("Patient already exists");
+    if (patientExists) throw new Error('Patient already exists');
 
     const patient = await new PatientModel({
       username,
@@ -29,7 +29,7 @@ const PatientSignUpMutation = mutationWithClientMutationId({
     return {
       token,
       id: patient._id,
-      success: "Patient has been created!",
+      success: 'Patient has been created!',
     };
   },
   outputFields: {

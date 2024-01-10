@@ -1,6 +1,6 @@
-import { PatientConnection } from "./PatientType";
-import { PatientLoader } from "./PatientLoader";
-import { connectionArgs } from "graphql-relay";
+import { PatientConnection } from './PatientType';
+import { PatientLoader } from './PatientLoader';
+import { connectionArgs } from 'graphql-relay';
 
 export const patientsConnectionField = (key: string) => ({
   [key]: {

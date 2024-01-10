@@ -1,4 +1,4 @@
-const JWT_TOKEN_KEY = "woovi";
+const JWT_TOKEN_KEY = 'woovi';
 
 export const getAuthToken = () => localStorage.getItem(JWT_TOKEN_KEY);
 

@@ -1,5 +1,5 @@
-import { DoctorSignInMutation } from "./mutations/DoctorSignInMutation";
-import { DoctorSignUpMutation } from "./mutations/DoctorSignUpMutation";
+import { DoctorSignInMutation } from './mutations/DoctorSignInMutation';
+import { DoctorSignUpMutation } from './mutations/DoctorSignUpMutation';
 
 const DoctorMutations = {
   DoctorSignInMutation,

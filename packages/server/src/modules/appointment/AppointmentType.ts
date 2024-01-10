@@ -1,29 +1,37 @@
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
-import { globalIdField, connectionDefinitions } from "graphql-relay";
+import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField, connectionDefinitions } from 'graphql-relay';
 
-import { registerTypeLoader, nodeInterface } from "../node/typeRegister";
-import { AppointmentLoader } from "./AppointmentLoader";
-import { Appointment } from "./AppointmentModel";
+import { registerTypeLoader, nodeInterface } from '../node/typeRegister';
+import { AppointmentLoader } from './AppointmentLoader';
+import { Appointment } from './AppointmentModel';
 
 const AppointmentType = new GraphQLObjectType<Appointment>({
-  name: "Appointment",
-  description: "Appointments scheduled by patient with chosen doctor",
+  name: 'Appointment',
+  description: 'Appointments scheduled by patient with chosen doctor',
   fields: () => ({
-    id: globalIdField("Appointment"),
+    id: globalIdField('Appointment'),
     doctorId: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (appointment) => appointment.doctorId,
+      resolve: appointment => appointment.doctorId,
     },
     patientId: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (appointment) => appointment.patientId,
+      resolve: appointment => appointment.patientId,
+    },
+    startsAt: {
+      type: GraphQLString,
+      resolve: appointment => appointment.startsAt,
+    },
+    date: {
+      type: GraphQLString,
+      resolve: appointment => appointment.date,
     },
   }),
   interfaces: () => [nodeInterface],
 });
 
 const AppointmentConnection = connectionDefinitions({
-  name: "Appointment",
+  name: 'Appointment',
   nodeType: AppointmentType,
 });
 

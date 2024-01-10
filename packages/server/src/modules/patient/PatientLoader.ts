@@ -1,7 +1,7 @@
-import { createLoader } from "@entria/graphql-mongo-helpers";
+import { createLoader } from '@entria/graphql-mongo-helpers';
 
-import { registerLoader } from "../loader/loaderRegister";
-import { PatientModel } from "./PatientModel";
+import { registerLoader } from '../loader/loaderRegister';
+import { PatientModel } from './PatientModel';
 
 const {
   Wrapper: Patient,
@@ -9,9 +9,9 @@ const {
   clearCache,
   load,
   loadAll,
-} = createLoader({ model: PatientModel, loaderName: "PatientLoader" });
+} = createLoader({ model: PatientModel, loaderName: 'PatientLoader' });
 
-registerLoader("PatientLoader", getLoader);
+registerLoader('PatientLoader', getLoader);
 
 export const PatientLoader = {
   Patient,

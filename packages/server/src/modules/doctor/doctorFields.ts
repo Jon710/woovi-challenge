@@ -1,6 +1,6 @@
-import { DoctorConnection } from "./DoctorType";
-import { DoctorLoader } from "./DoctorLoader";
-import { connectionArgs } from "graphql-relay";
+import { DoctorConnection } from './DoctorType';
+import { DoctorLoader } from './DoctorLoader';
+import { connectionArgs } from 'graphql-relay';
 
 export const doctorsConnectionField = (key: string) => ({
   [key]: {

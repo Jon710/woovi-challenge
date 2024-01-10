@@ -23,12 +23,7 @@ export default function SignIn() {
       handleSignIn({
         variables: values,
         onCompleted: ({ PatientSignInMutation }, error) => {
-          console.log(PatientSignInMutation);
-
-          if (error && error.length) {
-            console.log('e', error);
-            toast.error(error[0].message);
-          }
+          if (error && error.length) toast.error(error[0].message);
 
           signIn(PatientSignInMutation?.token, () => {
             navigate('/appointments', { replace: true });

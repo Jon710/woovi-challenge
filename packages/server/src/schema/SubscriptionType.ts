@@ -1,8 +1,8 @@
-import { GraphQLObjectType } from "graphql";
-
-import { messageSubscriptions } from "../modules/message/subscriptions/messageSubscriptions";
+import { GraphQLObjectType } from 'graphql';
 
 export const SubscriptionType = new GraphQLObjectType({
-  name: "Subscription",
-  fields: () => ({ ...messageSubscriptions }),
+  name: 'Subscription',
+  fields: () => ({
+    // ...messageSubscriptions
+  }),
 });

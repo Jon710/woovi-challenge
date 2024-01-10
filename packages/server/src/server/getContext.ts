@@ -1,7 +1,7 @@
-import { getDataloaders } from "../modules/loader/loaderRegister";
+import { getAllDataLoaders } from '../modules/loader/loaderRegister';
 
 const getContext = () => {
-  const dataloaders = getDataloaders();
+  const dataloaders = getAllDataLoaders();
 
   return { dataloaders } as const;
 };

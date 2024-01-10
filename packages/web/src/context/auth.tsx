@@ -4,9 +4,9 @@ import {
   useCallback,
   createContext,
   ReactNode,
-} from "react";
+} from 'react';
 
-import { getAuthToken, updateAuthToken } from "../helpers/getToken";
+import { getAuthToken, updateAuthToken } from '../helpers/getToken';
 
 export interface IAuthContext {
   token: string | undefined | null;
@@ -17,17 +17,17 @@ export interface IAuthContext {
 export const AuthContext = createContext<IAuthContext>(null!);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [userToken, setUserToken] = useState<IAuthContext["token"]>(() =>
-    getAuthToken()
+  const [userToken, setUserToken] = useState<IAuthContext['token']>(() =>
+    getAuthToken(),
   );
 
-  const signIn = useCallback<IAuthContext["signIn"]>((token, cb) => {
+  const signIn = useCallback<IAuthContext['signIn']>((token, cb) => {
     updateAuthToken(token);
     setUserToken(token);
     cb();
   }, []);
 
-  const signOut = useCallback<IAuthContext["signOut"]>((cb) => {
+  const signOut = useCallback<IAuthContext['signOut']>(cb => {
     setUserToken(null);
     updateAuthToken();
     cb();
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       signIn,
       signOut,
     }),
-    [userToken, signIn, signOut]
+    [userToken, signIn, signOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
